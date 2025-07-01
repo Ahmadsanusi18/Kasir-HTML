@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mad Store Kasir</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Signika+Negative&display=swap');
+
+        body, html, * {
+            font-family: "Signika Negative", sans-serif !important;
+        }
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .animate-fade-in-out {
+            animation: fadeInOut 3s ease-in-out forwards;
+        }
+        @keyframes fadeInOut {
+            0% { opacity: 0; transform: translateY(10px); }
+            10% { opacity: 1; transform: translateY(0); }
+            90% { opacity: 1; transform: translateY(0); }
+            100% { opacity: 0; transform: translateY(-10px); }
+        }
+       
+        @media print {
+            .no-print {
+                display: none !important;
+            }
+        }
+        .header-fixed {
+            position: fixed;
+            top: 0; /* Menempatkan header di bagian paling atas */
+            left: 0;
+            right: 0;
+            z-index: 1000; /* Pastikan header berada di atas konten lainnya */
+        }
+
+        #mobile-menu {
+            z-index: 1000;
+            box-shadow: -2px 0 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        #mobile-menu a {
+            transition: all 0.3s ease;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col font-inter bg-gray-100">
+    <header class="text-white shadow-lg no-print header-fixed" style="background-color: #0B1D51; position: fixed; top: 0; width: 100%; z-index: 1000;">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <img src="img/shop.png" alt="Logo Toko Mad Store" class="rounded-full w-8 h-8 sm:w-10 sm:h-10">
+                <h1 class="text-lg sm:text-xl md:text-2xl font-bold">Mad Store</h1>
+            </div>
+            <div class="flex items-center space-x-2 sm:space-x-4">
+                <div class="hidden sm:block">
+                    <span class="font-semibold text-sm sm:text-base">
+                        Kasir : Nama Kasir
+                    </span>
+                </div>
+                <button id="menu-toggle" class="bg-blue-700 hover:bg-blue-800 px-2 py-1 sm:px-3 sm:py-1 rounded-md text-xs sm:text-sm shadow-md transition duration-200 ease-in-out">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <nav id="mobile-menu" class="fixed top-0 right-0 w-64 h-full bg-[#0B1D51] transform translate-x-full transition-transform duration-300 ease-in-out">
+            <div class="flex flex-col h-full">
+                <div class="flex justify-end p-4">
+                    <button id="close-menu" class="text-white text-2xl hover:text-blue-300 transition">
+                        &times;
+                    </button>
+                </div>
+                <div class="text-center py-4 border-b border-blue-600">
+                    <h2 class="text-xl font-bold text-white">MENU</h2>
+                </div>
+                <ul class="mt-4 space-y-2 px-4 flex-grow">
+                    <li>
+                        <a href="index.html" class="flex justify-center items-center text-white py-3 hover:bg-[#1E3A8A] px-4 rounded-md transition">
+                            <span class="text-center">Home</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="pos.html" class="flex justify-center items-center text-white py-3 hover:bg-[#1E3A8A] px-4 rounded-md transition">
+                            <span class="text-center">Kasir</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="produk-manager.html" class="flex justify-center items-center text-white py-3 hover:bg-[#1E3A8A] px-4 rounded-md transition">
+                            <span class="text-center">Tambah Produk</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="tentang.html" class="flex justify-center items-center text-white py-3 hover:bg-[#1E3A8A] px-4 rounded-md transition">
+                            <span class="text-center">Tentang</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="histori.html" class="flex justify-center items-center text-white py-3 hover:bg-[#1E3A8A] px-4 rounded-md transition">
+                            <span class="text-center">Riwayat</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="flex justify-center items-center text-white py-3 hover:bg-[#1E3A8A] px-4 rounded-md transition">
+                            <span class="text-center">Keluar</span>
+                        </a>
+                    </li>
+                </ul>
+                <div class="p-4 text-center text-sm text-blue-200">
+                    © 2023 Mad Store
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="flex-grow container mx-auto px-2 sm:px-4 py-2 sm:py-6 flex flex-col lg:flex-row gap-3 sm:gap-6" style="padding-top: 60px;">
+        <div class="lg:w-1/2 bg-white rounded-lg shadow-md overflow-hidden">
+            <div class="p-3 sm:p-4 border-b border-gray-200">
+                <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-2">
+                    <h2 class="text-base sm:text-lg font-semibold mb-2 sm:mb-0">Daftar Produk</h2>
+                    <div class="relative w-full sm:max-w-xs sm:ml-2">
+                        <input type="text" placeholder="Cari produk..." class="w-full pl-8 pr-4 py-1.5 sm:py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm">
+                        <svg class="absolute left-2.5 top-2 sm:top-2.5 h-4 w-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                        </svg>
+                        <div class="absolute right-2 top-1/2 -translate-y-1/2" style="display: none;">
+                            <svg class="animate-spin h-5 w-5 text-blue-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-full overflow-x-auto no-scrollbar">
+                    <div class="flex space-x-1.5 sm:space-x-2 py-1 px-1 whitespace-nowrap scroll-smooth">
+                        <button class="px-3 py-1 rounded-full text-xs sm:text-sm whitespace-nowrap transition-colors duration-200 ease-in-out bg-[#0B1D51] text-white shadow-sm">
+                            Semua
+                        </button>
+                        <button class="px-3 py-1 rounded-full text-xs sm:text-sm whitespace-nowrap transition-colors duration-200 ease-in-out bg-gray-200 hover:bg-gray-300 text-gray-800">
+                            Minuman
+                        </button>
+                        <button class="px-3 py-1 rounded-full text-xs sm:text-sm whitespace-nowrap transition-colors duration-200 ease-in-out bg-gray-200 hover:bg-gray-300 text-gray-800">
+                            Makanan
+                        </button>
+                        <button class="px-3 py-1 rounded-full text-xs sm:text-sm whitespace-nowrap transition-colors duration-200 ease-in-out bg-gray-200 hover:bg-gray-300 text-gray-800">
+                            Snack
+                        </button>
+                        <button class="px-3 py-1 rounded-full text-xs sm:text-sm whitespace-nowrap transition-colors duration-200 ease-in-out bg-gray-200 hover:bg-gray-300 text-gray-800">
+                            Kecantikan
+                        </button>
+                        <button class="px-3 py-1 rounded-full text-xs sm:text-sm whitespace-nowrap transition-colors duration-200 ease-in-out bg-gray-200 hover:bg-gray-300 text-gray-800">
+                            Peralatan Mandi
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="grid grid-cols-2 xs:grid-cols-3 sm:grid-cols-4 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-2 p-2 sm:p-4 overflow-y-auto" style="max-height: 55vh; background-color: white;">
+                <div class="bg-gray-100 border border-gray-300 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition cursor-pointer transform hover:scale-105 duration-200 ease-in-out">
+                    <div class="bg-white p-1">
+                        <img src="img/isotonik.jpeg" alt="Product 1" class="w-full h-20 sm:h-24 object-contain">
+                    </div>
+                    <div class="p-2">
+                        <h3 class="font-medium text-xs sm:text-sm truncate">Produk Contoh 1</h3>
+                        <p class="text-green-600 font-bold mt-1 text-sm sm:text-base">Rp 5.000</p>
+                        <button class="w-full mt-2 text-white text-xs py-1 rounded transition duration-200 ease-in-out shadow-sm hover:shadow-md no-print" style="background-color: #118B50;">Tambah</button>
+                    </div>
+                </div>
+                <div class="bg-gray-100 border border-gray-300 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition cursor-pointer transform hover:scale-105 duration-200 ease-in-out">
+                    <div class="bg-white p-1">
+                        <img src="img/Rumput Laut.jpeg" alt="Product 2" class="w-full h-20 sm:h-24 object-contain">
+                    </div>
+                    <div class="p-2">
+                        <h3 class="font-medium text-xs sm:text-sm truncate">Produk Contoh 2</h3>
+                        <p class="text-green-600 font-bold mt-1 text-sm sm:text-base">Rp 8.000</p>
+                        <button class="w-full mt-2 text-white text-xs py-1 rounded transition duration-200 ease-in-out shadow-sm hover:shadow-md no-print" style="background-color: #118B50;">Tambah</button>
+                    </div>
+                </div>
+                <div class="bg-gray-100 border border-gray-300 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition cursor-pointer transform hover:scale-105 duration-200 ease-in-out">
+                    <div class="bg-white p-1">
+                        <img src="img/sari.jpeg" alt="Product 3" class="w-full h-20 sm:h-24 object-contain">
+                    </div>
+                    <div class="p-2">
+                        <h3 class="font-medium text-xs sm:text-sm truncate">Produk Contoh 3</h3>
+                        <p class="text-green-600 font-bold mt-1 text-sm sm:text-base">Rp 10.000</p>
+                        <button class="w-full mt-2 text-white text-xs py-1 rounded transition duration-200 ease-in-out shadow-sm hover:shadow-md no-print" style="background-color: #118B50;">Tambah</button>
+                    </div>
+                </div>
+                <div class="bg-gray-100 border border-gray-300 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition cursor-pointer transform hover:scale-105 duration-200 ease-in-out">
+                    <div class="bg-white p-1">
+                        <img src="img/teh botol.jpeg" alt="Product 4" class="w-full h-20 sm:h-24 object-contain">
+                    </div>
+                    <div class="p-2">
+                        <h3 class="font-medium text-xs sm:text-sm truncate">Produk Contoh 4</h3>
+                        <p class="text-green-600 font-bold mt-1 text-sm sm:text-base">Rp 5.000</p>
+                        <button class="w-full mt-2 text-white text-xs py-1 rounded transition duration-200 ease-in-out shadow-sm hover:shadow-md no-print" style="background-color: #118B50;">Tambah</button>
+                    </div>
+                </div>
+                <p class="col-span-full text-center text-gray-500 py-10" style="display: none;">Produk tidak ditemukan.</p>
+            </div>
+        </div>
+
+        <div class="lg:w-1/2 flex flex-col gap-3 sm:gap-6">
+            <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                <div class="p-3 sm:p-4 border-b border-gray-200">
+                    <h2 class="text-base sm:text-lg font-semibold">Transaksi Saat Ini</h2>
+                </div>
+                <div class="overflow-y-auto" style="max-height: 40vh;">
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead class="bg-gray-50 sticky top-0 z-10">
+                            <tr>
+                                <th class="px-2 py-2 text-left text-xs font-medium text-gray-500 uppercase">Produk</th>
+                                <th class="px-2 py-2 text-center text-xs font-medium text-gray-500 uppercase">Qty</th>
+                                <th class="px-2 py-2 text-right text-xs font-medium text-gray-500 uppercase">Total</th>
+                                <th class="px-2 py-2 text-center text-xs font-medium text-gray-500 uppercase">Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-gray-200">
+                            <tr>
+                                <td class="px-1 py-2">
+                                    <div class="flex items-center">
+                                        <img src="img/isotonik.jpeg" alt="Product 1" class="h-8 w-8 sm:h-10 sm:w-10 rounded object-cover flex-shrink-0">
+                                        <div class="ml-2 flex-grow">
+                                            <div class="text-xs sm:text-sm font-medium truncate">Produk Contoh 1</div>
+                                            <div class="text-xs text-gray-500">Rp 5.000</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="px-1 py-2 text-center">
+                                    <div class="flex justify-center items-center">
+                                        <button class="bg-gray-200 px-1.5 sm:px-2 rounded-l-md hover:bg-gray-300 text-sm transition duration-150 ease-in-out">-</button>
+                                        <span class="px-1.5 sm:px-2 border-t border-b border-gray-200 text-sm">1</span>
+                                        <button class="bg-gray-200 px-1.5 sm:px-2 rounded-r-md hover:bg-gray-300 text-sm transition duration-150 ease-in-out">+</button>
+                                    </div>
+                                </td>
+                                <td class="px-1 py-2 text-right text-sm">Rp 15.000</td>
+                                <td class="px-1 py-2 text-center">
+                                    <button class="text-red-600 hover:text-red-800 text-xs sm:text-sm transition duration-150 ease-in-out">Hapus</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="4" class="px-1 py-4 text-center text-gray-500" style="display: none;">Keranjang kosong. Tambahkan produk!</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="p-3 sm:p-4 border-t border-gray-200 bg-gray-50">
+                    <div class="flex justify-between text-sm sm:text-base mb-1">
+                        <span>Subtotal:</span>
+                        <span class="font-medium">Rp 15.000</span>
+                    </div>
+                    <div class="flex justify-between text-sm sm:text-base mb-1">
+                        <span>Diskon:</span>
+                        <span class="font-medium text-red-600">- Rp 0</span>
+                    </div>
+                    <div class="flex justify-between text-sm sm:text-base mb-1">
+                        <span>Jasa:</span>
+                        <span class="font-medium text-blue-700">+ Rp 0</span>
+                    </div>
+                    <div>
+                        <label for="manualService" class="block text-xs sm:text-sm font-medium text-gray-700 mb-1">Jasa</label>
+                        <input type="number" id="manualService" class="w-full border border-gray-300 rounded-md py-1.5 sm:py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm sm:text-base" placeholder="Masukkan biaya jasa (opsional)" value="0">
+                    </div>
+
+                    <div class="flex justify-between text-base sm:text-lg font-bold mt-2 pt-2 border-t border-gray-200">
+                        <span>Total:</span>
+                        <span>Rp 15.000</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-md overflow-hidden p-3 sm:p-4">
+                <h2 class="text-base sm:text-lg font-semibold mb-4">Pembayaran</h2>
+                <div class="mb-3">
+                    <label for="customerName" class="block text-xs sm:text-sm font-medium text-gray-700 mb-1">Nama Customer</label>
+                    <input type="text" id="customerName" class="w-full border border-gray-300 rounded-md py-1.5 sm:py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm sm:text-base" placeholder="Masukkan nama customer (opsional)">
+                </div>
+
+                <div class="grid grid-cols-1 xs:grid-cols-2 gap-2 sm:gap-4">
+                    <div>
+                        <label for="paymentMethod" class="block text-xs sm:text-sm font-medium text-gray-700 mb-1">Metode Pembayaran</label>
+                        <select id="paymentMethod" class="w-full border border-gray-300 rounded-md py-1.5 sm:py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm sm:text-base">
+                            <option value="Tunai">Tunai</option>
+                            <option value="Debit">Debit</option>
+                            <option value="QRIS">QRIS</option>
+                            <option value="E-Wallet">E-Wallet</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="paidAmount" class="block text-xs sm:text-sm font-medium text-gray-700 mb-1">Dibayar</label>
+                        <input type="number" id="paidAmount" class="w-full border border-gray-300 rounded-md py-1.5 sm:py-2 px-3 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm sm:text-base" placeholder="Masukkan jumlah pembayaran">
+                    </div>
+                </div>
+
+                <div class="flex justify-between text-base sm:text-lg font-bold mt-3">
+                    <span>Kembali:</span>
+                    <span>Rp 0</span>
+                </div>
+                
+                <div id="qris-section" class="mt-4 text-center p-2 bg-gray-50 rounded-md" style="display: none;">
+                    <p class="text-sm mb-2 text-gray-700">Silakan scan QR berikut untuk pembayaran sebesar:</p>
+                    <p class="text-xl font-extrabold text-green-700 mb-3">Rp 15.000</p>
+                    <img 
+                        class="mx-auto border-2 border-gray-300 rounded-lg p-2 bg-white shadow-md w-32 h-32 sm:w-40 sm:h-40 object-contain" 
+                        src="https://chart.googleapis.com/chart?cht=qr&chs=200x200&chl=Pembayaran%20QRIS%20Mad%20Store%20-%20Rp%2015.000" 
+                        alt="QRIS Payment">
+                </div>
+
+                <div class="flex flex-col sm:flex-row mt-4 space-y-2 sm:space-y-0 sm:space-x-3">
+                    <a href="home.html"
+                    class="flex-grow bg-[#077A7D] hover:bg-[#066a6c] text-white py-1.5 sm:py-2 px-3 sm:px-4 rounded-md transition duration-200 ease-in-out shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-[#077A7D] focus:ring-opacity-75 text-center">
+                        Kembali Ke Home
+                    </a>
+                    <button class="flex-grow bg-[#FFC107] hover:bg-[#FEBA17] text-white py-1.5 sm:py-2 px-3 sm:px-4 rounded-md transition duration-200 ease-in-out shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-75">
+                        Simpan & Cetak
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div class="fixed bottom-4 right-4 bg-green-500 text-white px-4 py-2 rounded-md shadow-lg z-50 animate-fade-in-out" style="display: none;">
+        Pesanan berhasil disimpan!
+    </div>
+    <div class="fixed bottom-4 right-4 bg-red-500 text-white px-4 py-2 rounded-md shadow-lg z-50 animate-fade-in-out" style="display: none;">
+        Terjadi kesalahan saat memproses pesanan.
+    </div>
+    <div class="fixed bottom-4 right-4 bg-blue-500 text-white px-4 py-2 rounded-md shadow-lg z-50 animate-fade-in-out" style="display: none;">
+        Informasi tambahan.
+    </div>
+
+    <script>
+        const menuToggle = document.getElementById('menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const closeMenu = document.getElementById('close-menu');
+        const paymentMethodSelect = document.getElementById('paymentMethod');
+        const paidAmountInput = document.getElementById('paidAmount');
+        const qrisSection = document.getElementById('qris-section');
+
+        menuToggle.addEventListener('click', (e) => {
+            e.stopPropagation();
+            mobileMenu.style.transform = 'translateX(0)';
+        });
+
+        const closeMobileMenu = () => {
+            mobileMenu.style.transform = 'translateX(100%)';
+        };
+
+        closeMenu.addEventListener('click', closeMobileMenu);
+
+        document.addEventListener('click', (e) => {
+            if (!mobileMenu.contains(e.target) && e.target !== menuToggle) {
+                closeMobileMenu();
+            }
+        });
+
+        mobileMenu.addEventListener('click', (e) => {
+            e.stopPropagation();
+        });
+
+        // JavaScript for handling payment method display
+        paymentMethodSelect.addEventListener('change', function() {
+            if (this.value === 'QRIS') {
+                paidAmountInput.closest('div').style.display = 'none'; // Hide paid amount input's parent div
+                qrisSection.style.display = 'block'; // Show QRIS section
+            } else {
+                paidAmountInput.closest('div').style.display = 'block'; // Show paid amount input's parent div
+                qrisSection.style.display = 'none'; // Hide QRIS section
+            }
+        });
+
+        // Initialize QRIS section visibility on load
+        document.addEventListener('DOMContentLoaded', () => {
+            if (paymentMethodSelect.value === 'QRIS') {
+                paidAmountInput.closest('div').style.display = 'none';
+                qrisSection.style.display = 'block';
+            } else {
+                paidAmountInput.closest('div').style.display = 'block';
+                qrisSection.style.display = 'none';
+            }
+        });
+
+        // Basic simulation for Livewire functionality (without actual Livewire)
+        // These are placeholder functions and won't actually update data
+        function addToCart(productId) {
+            console.log('Product added to cart:', productId);
+            // In a real application, this would trigger a Livewire call
+        }
+
+        function decrementQuantity(productId) {
+            console.log('Decrement quantity for:', productId);
+        }
+
+        function incrementQuantity(productId) {
+            console.log('Increment quantity for:', productId);
+        }
+
+        function removeItem(productId) {
+            console.log('Remove item:', productId);
+        }
+
+        function saveAndPrint() {
+            console.log('Save and Print clicked!');
+            // In a real application, this would trigger a Livewire call to save and then print
+            alert('Simpan & Cetak (simulasi)');
+        }
+
+        // Simulate Livewire model updates for inputs (no actual data binding)
+        document.getElementById('manualService').addEventListener('input', function() {
+            console.log('Manual service changed:', this.value);
+        });
+
+        document.getElementById('customerName').addEventListener('input', function() {
+            console.log('Customer name changed:', this.value);
+        });
+
+        document.getElementById('paidAmount').addEventListener('input', function() {
+            console.log('Paid amount changed:', this.value);
+        });
+
+    </script>
+</body>
+</html>

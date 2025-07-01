@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Signika+Negative&display=swap');
+        body {
+            font-family: "Signika Negative", sans-serif !important;
+        }
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #0B1D51 100%); /* Changed #764ba2 to #0B1D51 */
+        }
+        .form-container {
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        .input-field:focus {
+            border-color: #0B1D51; /* Changed #667eea to #0B1D51 */
+            box-shadow: 0 0 0 3px rgba(11, 29, 81, 0.2); /* Changed rgba(102, 126, 234, 0.2) to rgba(11, 29, 81, 0.2) */
+        }
+    </style>
+</head>
+<body class="bg-[#DBE2EF] min-h-screen flex items-center justify-center p-4">
+    <div class="bg-white rounded-lg shadow-md p-8 w-full max-w-md">
+        <div class="flex flex-col items-center mb-8">
+            <img src="img/shop.png" alt="Company logo" class="w-32 h-auto mb-4">
+            <h1 class="text-2xl font-bold text-gray-800">Daftar Akun Baru</h1>
+            <p class="text-gray-500 mt-2">Isi form berikut untuk membuat akun</p>
+        </div>
+
+        
+
+        <form method="POST" action="#" class="space-y-6">
+         
+            <div>
+                <label for="nama" class="block text-sm font-medium text-gray-700 mb-1">Nama Lengkap</label>
+                <input type="text" id="nama" name="nama" required value=""
+                    class="w-full px-4 py-2 rounded-lg border border-gray-300 input-field focus:outline-none transition duration-200"
+                    placeholder="Masukkan nama lengkap Anda">
+            </div>
+
+            <div>
+                <label for="nik" class="block text-sm font-medium text-gray-700 mb-1">NIK </label>
+                <input type="text" id="nik" name="nik" required value=""
+                    class="input-field w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none transition duration-200"
+                    placeholder="Masukkan NIK Anda">
+            </div>
+
+            <div>
+                <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Alamat Email</label>
+                <input type="email" id="email" name="email" required value=""
+                    class="input-field w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none transition duration-200"
+                    placeholder="contoh@email.com">
+            </div>
+
+            <div>
+                <label for="password" class="block text-sm font-medium text-gray-700 mb-1">Password</label>
+                <div class="relative">
+                    <input type="password" id="password" name="password" required
+                        class="input-field w-full px-4 py-3 pr-10 rounded-lg border border-gray-300 focus:outline-none transition duration-200"
+                        placeholder="Buat password yang aman">
+                    <span class="absolute inset-y-0 right-0 pr-3 flex items-center cursor-pointer" id="togglePassword">
+                        <i class="far fa-eye" id="eyeIcon"></i>
+                    </span>
+                </div>
+                <div class="password-strength mt-2 h-1 bg-gray-200 rounded-full">
+                    <div class="h-full rounded-full bg-red-500 w-1/4" id="strengthBar"></div>
+                </div>
+                <p class="text-xs text-gray-500 mt-1">Minimal 8 karakter dengan kombinasi huruf dan angka</p>
+            </div>
+
+            <div>
+                <label for="password_confirmation" class="block text-sm font-medium text-gray-700 mb-1">Konfirmasi Password</label>
+                <div class="relative">
+                    <input type="password" id="password_confirmation" name="password_confirmation" required
+                        class="input-field w-full px-4 py-3 pr-10 rounded-lg border border-gray-300 focus:outline-none transition duration-200"
+                        placeholder="Ulangi password Anda">
+                    <span class="absolute inset-y-0 right-0 pr-3 flex items-center cursor-pointer" id="toggleConfirmPassword">
+                        <i class="far fa-eye" id="confirmEyeIcon"></i>
+                    </span>
+                </div>
+            </div>
+
+           <!-- <div class="flex items-center">
+                <input type="checkbox" id="terms" name="terms" required
+                    class="w-4 h-4 text-[#0B1D51] rounded border-gray-300 focus:ring-[#0B1D51]"> Changed text-indigo-600 to text-[#0B1D51] -->
+                <!--<label for="terms" class="ml-2 block text-sm text-gray-700">
+                    Saya menyetujui <a href="#" class="text-[#0B1D51] hover:underline">syarat dan ketentuan</a>  Changed text-indigo-600 to text-[#0B1D51] -->
+                <!--</label>
+            </div>-->
+
+                  <a href="index.html" 
+   class="w-full block text-center py-3 px-4 bg-[#0B1D51] hover:bg-[#0B1D51] text-white font-medium rounded-lg transition duration-200 focus:outline-none focus:ring-2 focus:ring-[#0B1D51] focus:ring-offset-2">
+   Daftar
+</a>
+        </form>
+
+        <div class="mt-6 text-center">
+            <p class="text-sm text-gray-600">
+                Sudah punya akun? <a href="login.html" class="text-[#0B1D51] font-medium hover:underline">Masuk di sini</a> <!-- Changed text-indigo-600 to text-[#0B1D51] -->
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // Password strength indicator
+        document.getElementById('password').addEventListener('input', function(e) {
+            const password = e.target.value;
+            const strengthBar = document.getElementById('strengthBar');
+
+            let strength = 0;
+            if (password.length > 0) strength += 0.25;
+            if (password.length >= 8) strength += 0.25;
+            if (/[A-Z]/.test(password)) strength += 0.25;
+            if (/\d/.test(password)) strength += 0.25;
+
+            strengthBar.style.width = `${strength * 100}%`;
+            if (strength < 0.5) {
+                strengthBar.style.backgroundColor = '#ef4444'; // red
+            } else if (strength < 0.75) {
+                strengthBar.style.backgroundColor = '#f59e0b'; // amber
+            } else {
+                strengthBar.style.backgroundColor = '#10b981'; // emerald
+            }
+        });
+
+        // Toggle password visibility
+        const togglePassword = document.getElementById('togglePassword');
+        const passwordField = document.getElementById('password');
+        const eyeIcon = document.getElementById('eyeIcon');
+
+        togglePassword.addEventListener('click', function() {
+            const type = passwordField.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordField.setAttribute('type', type);
+            // Toggle the eye icon
+            if (type === 'password') {
+                eyeIcon.classList.remove('fa-eye-slash');
+                eyeIcon.classList.add('fa-eye');
+            } else {
+                eyeIcon.classList.remove('fa-eye');
+                eyeIcon.classList.add('fa-eye-slash');
+            }
+        });
+
+        // Toggle confirm password visibility
+        const toggleConfirmPassword = document.getElementById('toggleConfirmPassword');
+        const confirmPasswordField = document.getElementById('password_confirmation');
+        const confirmEyeIcon = document.getElementById('confirmEyeIcon');
+
+        toggleConfirmPassword.addEventListener('click', function() {
+            const type = confirmPasswordField.getAttribute('type') === 'password' ? 'text' : 'password';
+            confirmPasswordField.setAttribute('type', type);
+            // Toggle the eye icon
+            if (type === 'password') {
+                confirmEyeIcon.classList.remove('fa-eye-slash');
+                confirmEyeIcon.classList.add('fa-eye');
+            } else {
+                confirmEyeIcon.classList.remove('fa-eye');
+                confirmEyeIcon.classList.add('fa-eye-slash');
+            }
+        });
+    </script>
+</body>
+</html>

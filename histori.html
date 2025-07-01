@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Riwayat Pembelian - Mad Store</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Signika+Negative&display=swap" rel="stylesheet">
+    <style>
+        body, html, * {
+            font-family: "Signika Negative", sans-serif !important;
+        }
+        
+        @media print {
+            .no-print {
+                display: none !important;
+            }
+        }
+        .header-fixed {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+        #mobile-menu {
+            z-index: 1000;
+            box-shadow: -2px 0 10px rgba(0, 0, 0, 0.3);
+        }
+        #mobile-menu a {
+            transition: all 0.3s ease;
+        }
+        /* Animation for detail panel */
+        @keyframes slideDown {
+            from {
+                max-height: 0;
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                max-height: 500px; /* Adjust based on expected content height */
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .animate-slide-down {
+            animation: slideDown 0.3s ease-out forwards;
+            overflow: hidden;
+            max-height: 0; /* Initial state for animation */
+            opacity: 0;
+        }
+        .rotated-icon {
+            transform: rotate(90deg);
+            color: #2563eb; /* blue-600 */
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col font-inter bg-gray-100">
+
+    <header class="text-white shadow-lg no-print header-fixed" style="background-color: #0B1D51;">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <img src="img/shop.png" alt="Logo Toko Mad Store" class="rounded-full w-8 h-8 sm:w-10 sm:h-10">
+                <h1 class="text-lg sm:text-xl md:text-2xl font-bold">Mad Store</h1>
+            </div>
+            <div class="flex items-center space-x-2 sm:space-x-4">
+                <div class="hidden sm:block">
+                    <span class="font-semibold text-sm sm:text-base">
+                        Kasir : Nama Kasir
+                    </span>
+                </div>
+                <button id="menu-toggle" class="bg-blue-700 hover:bg-blue-800 px-2 py-1 sm:px-3 sm:py-1 rounded-md text-xs sm:text-sm shadow-md transition duration-200 ease-in-out">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <nav id="mobile-menu" class="fixed top-0 right-0 w-64 h-full bg-[#0B1D51] transform translate-x-full transition-transform duration-300 ease-in-out">
+            <div class="flex flex-col h-full">
+                <div class="flex justify-end p-4">
+                    <button id="close-menu" class="text-white text-2xl hover:text-blue-300 transition">
+                        &times;
+                    </button>
+                </div>
+                <div class="text-center py-4 border-b border-blue-600">
+                    <h2 class="text-xl font-bold text-white">MENU</h2>
+                </div>
+                <ul class="mt-4 space-y-2 px-4 flex-grow">
+                    <li>
+                        <a href="index.html" class="flex justify-center items-center text-white py-3 hover:bg-[#1E3A8A] px-4 rounded-md transition">
+                            <span class="text-center">Home</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="pos.html" class="flex justify-center items-center text-white py-3 hover:bg-[#1E3A8A] px-4 rounded-md transition">
+                            <span class="text-center">Kasir</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="produk-manager.html" class="flex justify-center items-center text-white py-3 hover:bg-[#1E3A8A] px-4 rounded-md transition">
+                            <span class="text-center">Tambah Produk</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="tentang.html" class="flex justify-center items-center text-white py-3 hover:bg-[#1E3A8A] px-4 rounded-md transition">
+                            <span class="text-center">Tentang</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="histori.html" class="flex justify-center items-center text-white py-3 hover:bg-[#1E3A8A] px-4 rounded-md transition">
+                            <span class="text-center">Riwayat</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="flex justify-center items-center text-white py-3 hover:bg-[#1E3A8A] px-4 rounded-md transition">
+                            <span class="text-center">Keluar</span>
+                        </a>
+                    </li>
+                </ul>
+                <div class="p-4 text-center text-sm text-blue-200">
+                    © 2023 Mad Store
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <script>
+        const menuToggle = document.getElementById('menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const closeMenu = document.getElementById('close-menu');
+
+        menuToggle.addEventListener('click', (e) => {
+            e.stopPropagation();
+            mobileMenu.style.transform = 'translateX(0)';
+        });
+
+        const closeMobileMenu = () => {
+            mobileMenu.style.transform = 'translateX(100%)';
+        };
+
+        closeMenu.addEventListener('click', closeMobileMenu);
+
+        document.addEventListener('click', (e) => {
+            if (!mobileMenu.contains(e.target) && e.target !== menuToggle) {
+                closeMobileMenu();
+            }
+        });
+
+        mobileMenu.addEventListener('click', (e) => {
+            e.stopPropagation();
+        });
+
+        // Function to toggle transaction details
+        function toggleDetails(transactionId) {
+            const detailPanel = document.getElementById('details-' + transactionId);
+            const arrowIcon = document.getElementById('arrow-' + transactionId);
+            const totalAmountDisplay = document.getElementById('total-amount-' + transactionId);
+
+            if (detailPanel.style.maxHeight === '0px' || detailPanel.style.maxHeight === '') {
+                detailPanel.style.maxHeight = '500px'; // Set to a value large enough to show content
+                detailPanel.style.opacity = '1';
+                detailPanel.style.transform = 'translateY(0)';
+                arrowIcon.classList.add('rotated-icon');
+                if (totalAmountDisplay) totalAmountDisplay.style.display = 'none';
+            } else {
+                detailPanel.style.maxHeight = '0px';
+                detailPanel.style.opacity = '0';
+                detailPanel.style.transform = 'translateY(-10px)';
+                arrowIcon.classList.remove('rotated-icon');
+                if (totalAmountDisplay) totalAmountDisplay.style.display = 'block';
+            }
+        }
+    </script>
+
+    <div class="p-6 mt-20"> <h1 class="text-4xl font-semibold mb-4 text-center">Riwayat Pembelian</h1>
+
+        <div class="mb-4">
+            <input
+                type="text"
+                placeholder="Cari nama pelanggan atau metode pembayaran..."
+                class="w-full px-4 py-2 border rounded shadow-sm focus:outline-none focus:ring focus:border-blue-300"
+            >
+        </div>
+
+        <div class="border rounded mb-4 bg-white shadow overflow-hidden transition-all duration-300">
+            <button onclick="toggleDetails(1)"
+            class="w-full text-left p-4 hover:bg-gray-100 flex justify-between items-center transition">
+                <div>
+                    <div class="font-semibold">Budi Santoso</div>
+                    <div class="text-sm text-gray-600">
+                        28 Juni 2025 10:30
+                    </div>
+                    <div class="text-sm text-gray-600">Metode: Tunai</div>
+                </div>
+                <div class="flex items-center space-x-3">
+                    <div id="total-amount-1" class="text-sm text-gray-800 font-semibold whitespace-nowrap">
+                        Rp55.000
+                    </div>
+                    <svg id="arrow-1" class="w-5 h-5 transform transition-transform duration-300"
+                            fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9 5l7 7-7 7" />
+                    </svg>
+                </div>
+            </button>
+            <div id="details-1" class="p-4 border-t bg-gray-50 text-sm animate-slide-down">
+                <table class="w-full text-sm mt-2 border">
+                    <thead>
+                        <tr class="bg-gray-200 text-left">
+                            <th class="p-2 border">Produk</th>
+                            <th class="p-2 border">Harga</th>
+                            <th class="p-2 border">Jumlah</th>
+                            <th class="p-2 border">Subtotal</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="p-2 border">Produk Contoh 1</td>
+                            <td class="p-2 border">Rp5.000</td>
+                            <td class="p-2 border">2</td>
+                            <td class="p-2 border">Rp10.000</td>
+                        </tr>
+                        <tr>
+                            <td class="p-2 border">Produk Contoh 3</td>
+                            <td class="p-2 border">Rp10.000</td>
+                            <td class="p-2 border">1</td>
+                            <td class="p-2 border">Rp10.000</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="text-right mt-2 font-semibold">
+                    Total: Rp20.000
+                </div>
+            </div>
+        </div>
+
+        <div class="border rounded mb-4 bg-white shadow overflow-hidden transition-all duration-300">
+            <button onclick="toggleDetails(2)"
+            class="w-full text-left p-4 hover:bg-gray-100 flex justify-between items-center transition">
+                <div>
+                    <div class="font-semibold">Umum</div>
+                    <div class="text-sm text-gray-600">
+                        27 Juni 2025 15:00
+                    </div>
+                    <div class="text-sm text-gray-600">Metode: QRIS</div>
+                </div>
+                <div class="flex items-center space-x-3">
+                    <div id="total-amount-2" class="text-sm text-gray-800 font-semibold whitespace-nowrap">
+                        Rp8.000
+                    </div>
+                    <svg id="arrow-2" class="w-5 h-5 transform transition-transform duration-300"
+                            fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9 5l7 7-7 7" />
+                    </svg>
+                </div>
+            </button>
+            <div id="details-2" class="p-4 border-t bg-gray-50 text-sm animate-slide-down">
+                <table class="w-full text-sm mt-2 border">
+                    <thead>
+                        <tr class="bg-gray-200 text-left">
+                            <th class="p-2 border">Produk</th>
+                            <th class="p-2 border">Harga</th>
+                            <th class="p-2 border">Jumlah</th>
+                            <th class="p-2 border">Subtotal</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="p-2 border">Produk Contoh 2</td>
+                            <td class="p-2 border">Rp8.000</td>
+                            <td class="p-2 border">1</td>
+                            <td class="p-2 border">Rp8.000</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="text-right mt-2 font-semibold">
+                    Total: Rp8.000
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-4 text-center">
+            <nav class="relative z-0 inline-flex shadow-sm -space-x-px" aria-label="Pagination">
+                <a href="#" class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+                    <span class="sr-only">Previous</span>
+                    <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                        <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" />
+                    </svg>
+                </a>
+                <a href="#" aria-current="page" class="z-10 bg-indigo-50 border-indigo-500 text-indigo-600 relative inline-flex items-center px-4 py-2 border text-sm font-medium">1</a>
+                <a href="#" class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">2</a>
+                <a href="#" class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">3</a>
+                <a href="#" class="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+                    <span class="sr-only">Next</span>
+                    <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                        <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+                    </svg>
+                </a>
+            </nav>
+        </div>
+    </div>
+</body>
+</html>

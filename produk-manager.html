@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manajemen Produk - Mad Store</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrojS+9uQyR+d5V6/xVwQ3E/30j3uL3+a6n7/e2P/T5/M9P/O6jM4/X0/D1/b0/P3/A4/S6/w0/K5/I7/B8/L9/X2/Q7/W8/Z7/C3/V2/U9/H8/G9/F0/A1/B2/C3/D4/E5/F6/G7/H8/I9/J0/K1/L2/M3/N4/O5/P6/Q7/R8/S9/T0/U1/V2/W3/X4/Y5/Z6==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Signika+Negative&display=swap');
+
+        body, html, * {
+            font-family: "Signika Negative", sans-serif !important;
+        }
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .animate-fade-in-out {
+            animation: fadeInOut 3s ease-in-out forwards;
+        }
+        @keyframes fadeInOut {
+            0% { opacity: 0; transform: translateY(10px); }
+            10% { opacity: 1; transform: translateY(0); }
+            90% { opacity: 1; transform: translateY(0); }
+            100% { opacity: 0; transform: translateY(-10px); }
+        }
+        
+        @media print {
+            .no-print {
+                display: none !important;
+            }
+        }
+        .header-fixed {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+        }
+        #mobile-menu {
+            z-index: 1000;
+            box-shadow: -2px 0 10px rgba(0, 0, 0, 0.3);
+        }
+        #mobile-menu a {
+            transition: all 0.3s ease;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col font-inter bg-gray-100">
+   <header class="text-white shadow-lg no-print header-fixed" style="background-color: #0B1D51;">
+           <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+               <div class="flex items-center space-x-2">
+                   <img src="img/shop.png" alt="Logo Toko Mad Store" class="rounded-full w-8 h-8 sm:w-10 sm:h-10">
+                   <h1 class="text-lg sm:text-xl md:text-2xl font-bold">Mad Store</h1>
+               </div>
+               <div class="flex items-center space-x-2 sm:space-x-4">
+                   <div class="hidden sm:block">
+                       <span class="font-semibold text-sm sm:text-base">
+                           Kasir : Nama Kasir
+                       </span>
+                   </div>
+                   <button id="menu-toggle" class="bg-blue-700 hover:bg-blue-800 px-2 py-1 sm:px-3 sm:py-1 rounded-md text-xs sm:text-sm shadow-md transition duration-200 ease-in-out">
+                       <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                       </svg>
+                   </button>
+               </div>
+           </div>
+           <nav id="mobile-menu" class="fixed top-0 right-0 w-64 h-full bg-[#0B1D51] transform translate-x-full transition-transform duration-300 ease-in-out">
+               <div class="flex flex-col h-full">
+                   <div class="flex justify-end p-4">
+                       <button id="close-menu" class="text-white text-2xl hover:text-blue-300 transition">
+                           &times;
+                       </button>
+                   </div>
+                   <div class="text-center py-4 border-b border-blue-600">
+                       <h2 class="text-xl font-bold text-white">MENU</h2>
+                   </div>
+                   <ul class="mt-4 space-y-2 px-4 flex-grow">
+                       <li>
+                           <a href="index.html" class="flex justify-center items-center text-white py-3 hover:bg-[#1E3A8A] px-4 rounded-md transition">
+                               <span class="text-center">Home</span>
+                           </a>
+                       </li>
+                       <li>
+                           <a href="pos.html" class="flex justify-center items-center text-white py-3 hover:bg-[#1E3A8A] px-4 rounded-md transition">
+                               <span class="text-center">Kasir</span>
+                           </a>
+                       </li>
+                       <li>
+                           <a href="produk-manager.html" class="flex justify-center items-center text-white py-3 hover:bg-[#1E3A8A] px-4 rounded-md transition">
+                               <span class="text-center">Tambah Produk</span>
+                           </a>
+                       </li>
+                       <li>
+                           <a href="tentang.html" class="flex justify-center items-center text-white py-3 hover:bg-[#1E3A8A] px-4 rounded-md transition">
+                               <span class="text-center">Tentang</span>
+                           </a>
+                       </li>
+                       <li>
+                           <a href="histori.html" class="flex justify-center items-center text-white py-3 hover:bg-[#1E3A8A] px-4 rounded-md transition">
+                               <span class="text-center">Riwayat</span>
+                           </a>
+                       </li>
+                       <li>
+                           <a href="#" class="flex justify-center items-center text-white py-3 hover:bg-[#1E3A8A] px-4 rounded-md transition">
+                               <span class="text-center">Keluar</span>
+                           </a>
+                       </li>
+                   </ul>
+                   <div class="p-4 text-center text-sm text-blue-200">
+                       © 2023 Mad Store
+                   </div>
+               </div>
+           </nav>
+   </header>
+
+   <script>
+           const menuToggle = document.getElementById('menu-toggle');
+           const mobileMenu = document.getElementById('mobile-menu');
+           const closeMenu = document.getElementById('close-menu');
+
+           menuToggle.addEventListener('click', (e) => {
+               e.stopPropagation();
+               mobileMenu.style.transform = 'translateX(0)';
+           });
+
+           const closeMobileMenu = () => {
+               mobileMenu.style.transform = 'translateX(100%)';
+           };
+
+           closeMenu.addEventListener('click', closeMobileMenu);
+
+           document.addEventListener('click', (e) => {
+               if (!mobileMenu.contains(e.target) && e.target !== menuToggle) {
+                   closeMobileMenu();
+               }
+           });
+
+           mobileMenu.addEventListener('click', (e) => {
+               e.stopPropagation();
+           });
+
+           // Simple state for demonstration of the form toggle
+           let showForm = false; // Initial state
+
+           function toggleForm() {
+               showForm = !showForm;
+               const formContainer = document.getElementById('productForm');
+               const toggleButton = document.querySelector('button[onclick="toggleForm()"]');
+
+               if (formContainer) {
+                   formContainer.style.display = showForm ? 'block' : 'none';
+               }
+               if (toggleButton) {
+                   toggleButton.textContent = showForm ? 'Sembunyikan Form' : 'Tambah Produk Baru';
+               }
+           }
+
+           // Simulate a message display (for the "session()->has('message')" part)
+           document.addEventListener('DOMContentLoaded', () => {
+               const messageDiv = document.getElementById('successMessage');
+               if (messageDiv) {
+                   setTimeout(() => {
+                       messageDiv.style.display = 'none'; // Hide after 3 seconds
+                   }, 3000);
+               }
+           });
+   </script>
+
+   <div class="min-h-screen bg-gray-100 py-4 px-2 sm:py-6 sm:px-4 lg:px-8" style="padding-top: 100px;">
+           <div class="max-w-7xl mx-auto">
+               <h2 class="text-3xl font-extrabold text-gray-900 text-center mb-10">Manajemen Produk</h2>
+               
+               <div id="successMessage" class="bg-green-100 border border-green-400 text-green-700 px-4 py-2 rounded mb-4 text-sm shadow-md" style="display:none;">
+                   Produk berhasil ditambahkan/diperbarui! (Simulasi pesan)
+               </div>
+
+               <div class="mb-4 text-right">
+                    <a href="home.html" class="inline-block px-4 py-2 custom-teal-button text-white rounded-lg bg-[#066669] transition duration-200">
+                        Home
+                    </a>
+                   <button onclick="toggleForm()" class="bg-[#FFC107] hover:bg-[#FEBA17] text-white px-6 py-2 rounded-lg transition duration-300 shadow-md">
+                       Tambah Produk Baru
+                   </button>
+               </div>
+
+               <div id="productForm" class="bg-white p-6 rounded-lg shadow-lg mb-6" style="display: none;">
+                   <form onsubmit="event.preventDefault(); alert('Form disubmit!');"> <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                           <input type="text" placeholder="Nama Produk" class="border border-gray-300 px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                           <input type="text" placeholder="Kode Produk" class="border border-gray-300 px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                           <input type="number" placeholder="Harga (Rp)" class="border border-gray-300 px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                           <input type="text" placeholder="Kategori" class="border border-gray-300 px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                           <textarea placeholder="Deskripsi" class="border border-gray-300 px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 md:col-span-2"></textarea>
+
+                           <div class="md:col-span-2">
+                               <input type="file" class="block w-full border border-gray-300 rounded-lg">
+                               </div>
+
+                           <div class="md:col-span-2 flex justify-end space-x-4 mt-4">
+                               <button type="button" onclick="alert('Form dibatalkan!'); toggleForm();" class="px-4 py-2 bg-gray-200 rounded-lg hover:bg-gray-300 transition duration-300">Batal</button>
+                               <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition duration-300">
+                                   Simpan </button>
+                           </div>
+                       </div>
+                   </form>
+               </div>
+
+               <h3 class="text-xl font-semibold text-gray-800 mt-6 mb-2">Minuman</h3>
+               <div class="bg-white rounded-lg shadow-lg overflow-x-auto mb-6">
+                   <table class="min-w-full divide-y divide-gray-200">
+                       <thead class="bg-gray-50">
+                           <tr>
+                               <th class="px-4 py-2 text-left">Gambar</th>
+                               <th class="px-4 py-2 text-left">Nama</th>
+                               <th class="px-4 py-2 text-left">Kode</th>
+                               <th class="px-4 py-2 text-left">Harga</th>
+                               <th class="px-4 py-2 text-left">Aksi</th>
+                           </tr>
+                       </thead>
+                       <tbody>
+                           <tr class="hover:bg-gray-100 transition duration-300">
+                               <td class="px-4 py-2">
+                                   <img src="img/isotonik.jpeg" class="h-10 w-10 object-cover rounded-lg" alt="Kopi Susu">
+                               </td>
+                               <td class="px-4 py-2">Produk Contoh 1</td>
+                               <td class="px-4 py-2">KS001</td>
+                               <td class="px-4 py-2">Rp 5.000</td>
+                               <td class="px-4 py-2">
+                                   <button onclick="alert('Edit Kopi Susu');" class="text-blue-600 hover:underline">Edit</button>
+                                   <button onclick="alert('Hapus Kopi Susu');" class="text-red-600 hover:underline ml-2">Hapus</button>
+                               </td>
+                           </tr>
+                           
+                       </tbody>
+                   </table>
+               </div>
+
+               <h3 class="text-xl font-semibold text-gray-800 mt-6 mb-2">Makanan</h3>
+               <div class="bg-white rounded-lg shadow-lg overflow-x-auto mb-6">
+                   <table class="min-w-full divide-y divide-gray-200">
+                       <thead class="bg-gray-50">
+                           <tr>
+                               <th class="px-4 py-2 text-left">Gambar</th>
+                               <th class="px-4 py-2 text-left">Nama</th>
+                               <th class="px-4 py-2 text-left">Kode</th>
+                               <th class="px-4 py-2 text-left">Harga</th>
+                               <th class="px-4 py-2 text-left">Aksi</th>
+                           </tr>
+                       </thead>
+                       <tbody>
+                        <tr class="hover:bg-gray-100 transition duration-300">
+                               <td class="px-4 py-2">
+                                   <img src="img/Rumput Laut.jpeg" class="h-10 w-10 object-cover rounded-lg" alt="Teh Manis">
+                               </td>
+                               <td class="px-4 py-2">Produk Contoh 2</td>
+                               <td class="px-4 py-2">TM002</td>
+                               <td class="px-4 py-2">Rp 8.000</td>
+                               <td class="px-4 py-2">
+                                   <button onclick="alert('Edit Teh Manis');" class="text-blue-600 hover:underline">Edit</button>
+                                   <button onclick="alert('Hapus Teh Manis');" class="text-red-600 hover:underline ml-2">Hapus</button>
+                               </td>
+                           </tr>
+                           <tr class="hover:bg-gray-100 transition duration-300">
+                               <td class="px-4 py-2">
+                                   <img src="img/sari.jpeg" class="h-10 w-10 object-cover rounded-lg" alt="Nasi Goreng">
+                               </td>
+                               <td class="px-4 py-2">Produk Contoh 3</td>
+                               <td class="px-4 py-2">NG001</td>
+                               <td class="px-4 py-2">Rp 10.000</td>
+                               <td class="px-4 py-2">
+                                   <button onclick="alert('Edit Nasi Goreng');" class="text-blue-600 hover:underline">Edit</button>
+                                   <button onclick="alert('Hapus Nasi Goreng');" class="text-red-600 hover:underline ml-2">Hapus</button>
+                               </td>
+                           </tr>
+                       </tbody>
+                   </table>
+               </div>
+
+               <div class="mt-4 text-center">
+                   <nav class="relative z-0 inline-flex shadow-sm -space-x-px" aria-label="Pagination">
+                       <a href="#" class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+                           <span class="sr-only">Previous</span>
+                           <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                               <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" />
+                           </svg>
+                       </a>
+                       <a href="#" aria-current="page" class="z-10 bg-indigo-50 border-indigo-500 text-indigo-600 relative inline-flex items-center px-4 py-2 border text-sm font-medium">1</a>
+                       <a href="#" class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">2</a>
+                       <a href="#" class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">3</a>
+                       <a href="#" class="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+                           <span class="sr-only">Next</span>
+                           <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                               <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+                           </svg>
+                       </a>
+                   </nav>
+               </div>
+           </div>
+   </div>
+</body>
+</html>
